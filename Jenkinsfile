@@ -14,6 +14,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/niveshsunny/cafe.git'
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -23,20 +24,22 @@ pipeline {
                     sh "docker build -t ${imageName}:${imageTag} ."
                 }
             }
-
         }
-        stage('Upload App Image') {
-          steps{
-            script {
-              def imageName = 'mycafe'  // Define the image name
-              docker.withRegistry(caferegistry, registryCredential) {
-                // Push the Docker image with a unique tag based on the build number
-                sh "docker push $imageName:latest"
-                // Also push the image with 'latest' tag for easy reference
-                sh "docker push $imageName:latest"
-              }
+
+        stage('Upload App Image to ECR') {
+            steps {
+                script {
+                    // Define the image name
+                    def imageName = 'mycafe'
+
+
+                    // Tag the Docker image for ECR
+                    sh "docker tag ${imageName}:${imageTag} $appRegistry:${imageTag}"
+
+                    // Push the Docker image to ECR
+                    sh "docker push $appRegistry:${imageTag}"
+                }
             }
-          }
         }
     }
 }
