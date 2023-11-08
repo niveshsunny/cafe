@@ -31,7 +31,7 @@ pipeline {
               def imageName = 'mycafe'  // Define the image name
               docker.withRegistry(caferegistry, registryCredential) {
                 // Push the Docker image with a unique tag based on the build number
-                sh "docker push $imageName:$BUILD_NUMBER"
+                sh "docker push $imageName:latest"
                 // Also push the image with 'latest' tag for easy reference
                 sh "docker push $imageName:latest"
               }
