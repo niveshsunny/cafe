@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Fetch code') {
             steps {
-                git branch: 'main', url: 'git@github.com:niveshsunny/cafe.git'
+                git branch: 'main', url: 'https://github.com/niveshsunny/cafe.git'
             }
         }
         stage('Build Docker Image') {
