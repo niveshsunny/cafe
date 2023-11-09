@@ -25,8 +25,10 @@ pipeline {
         stage('Upload App Image to ECR') {
             steps {
                 script {
-                    sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 158897922573.dkr.ecr.us-east-1.amazonaws.com'
-                    sh "docker push $appRegistry:$imageName"
+                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 158897922573.dkr.ecr.us-east-1.amazonaws.com"
+                    sh "docker build -t cafe ."
+                    sh "docker tag cafe:latest 158897922573.dkr.ecr.us-east-1.amazonaws.com/cafe:latest"
+                    sh "docker push 158897922573.dkr.ecr.us-east-1.amazonaws.com/cafe:latest"
                 }
             }
         }
