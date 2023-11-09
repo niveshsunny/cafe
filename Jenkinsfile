@@ -4,6 +4,7 @@ pipeline {
         appRegistry = "158897922573.dkr.ecr.us-east-1.amazonaws.com/cafe"
         imageName = "mycafe"
         imageTag = "latest"
+        dockerHubUsername = "niveshsunny"
     }
 
     stages {
@@ -26,8 +27,8 @@ pipeline {
             steps {
                 script {
                     sh "docker login -u $dockerHubUsername -p 'Nivesh@143'"  // Replace with your Docker Hub password
-                    sh "docker build -t niveshsunny/cafe:latest .
-                    sh "docker push niveshsunny/cafe:latest"
+                    sh "docker build -t $dockerHubUsername/$imageName:$imageTag ."
+                    sh "docker push $dockerHubUsername/$imageName:$imageTag"
                 }
             }
         }
