@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        dockerHubUsername = 'niveshsunny'  // Your Docker Hub username
-        imageName = 'mycafe'
-        imageTag = 'latest'
+        appRegistry = "158897922573.dkr.ecr.us-east-1.amazonaws.com/cafe"
+        imageName = "mycafe"
+        imageTag = "latest"
     }
 
     stages {
