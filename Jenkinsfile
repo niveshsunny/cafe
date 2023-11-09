@@ -26,7 +26,8 @@ pipeline {
             steps {
                 script {
                     sh "docker login -u $dockerHubUsername -p 'Nivesh@143'"  // Replace with your Docker Hub password
-                    sh "docker push $dockerHubUsername/$imageName:$imageTag"
+                    sh "docker build -t niveshsunny/cafe:latest .
+                    sh "docker push niveshsunny/cafe:latest"
                 }
             }
         }
