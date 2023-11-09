@@ -5,6 +5,8 @@ pipeline {
         imageName = "mycafe"
         imageTag = "latest"
         dockerHubUsername = "niveshsunny"
+        cluster = "cafe"
+        service = "cafe"
     }
 
     stages {
