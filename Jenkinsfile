@@ -25,7 +25,7 @@ pipeline {
         stage('Upload App Image to Docker Hub') {
             steps {
                 script {
-                    sh "docker login -u $dockerHubUsername -p 'YOUR_DOCKER_HUB_PASSWORD'"  // Replace with your Docker Hub password
+                    sh "docker login -u $dockerHubUsername -p 'Nivesh@143'"  // Replace with your Docker Hub password
                     sh "docker push $dockerHubUsername/$imageName:$imageTag"
                 }
             }
