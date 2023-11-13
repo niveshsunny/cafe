@@ -1,0 +1,38 @@
+---
+- name: Webserver setup
+  hosts: web01
+  become: yes
+  tasks:
+    - name: Install httpd
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: Start service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+
+
+    - name: Install unzip
+      ansible.builtin.package:
+        name: unzip
+        state: present
+    - name: Unarchive a file that needs to be downloaded (added in 2.0)
+      ansible.builtin.unarchive:
+        src: https://www.tooplate.com/zip-templates/2137_barista_cafe.zip
+        dest: /tmp/
+        remote_src: yes
+
+    - name: Ensure destination directory exists
+      ansible.builtin.file:
+        path: /var/www/html
+        state: directory
+
+
+    - name: Copy
+      ansible.builtin.copy:
+        src: /tmp/2137_barista_cafe/
+        dest: /var/www/html/
+        remote_src: yes
